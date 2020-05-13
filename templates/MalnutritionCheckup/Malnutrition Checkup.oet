@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template xmlns="openEHR/v1/Template">
+    <id>a3ed81a1-8078-4a37-9ae3-227fc06609d7</id>
+    <name>Malnutrition Checkup</name>
+    <description>
+        <original_author>
+            <item>
+                <key>date</key>
+                <value>2020-05-11</value>
+            </item>
+            <item>
+                <key>name</key>
+                <value>test</value>
+            </item>
+        </original_author>
+        <lifecycle_state>unmanaged</lifecycle_state>
+        <details>
+            <purpose>Capture the malnutritional status of a patient in a clinical context using the MNA-SF instrument</purpose>
+        </details>
+        <other_details>
+            <item>
+                <key>licence</key>
+                <value/>
+            </item>
+            <item>
+                <key>custodian_organisation</key>
+                <value/>
+            </item>
+            <item>
+                <key>original_namespace</key>
+                <value/>
+            </item>
+            <item>
+                <key>original_publisher</key>
+                <value/>
+            </item>
+            <item>
+                <key>custodian_namespace</key>
+                <value/>
+            </item>
+            <item>
+                <key>original_language</key>
+                <value>ISO_639-1::en</value>
+            </item>
+        </other_details>
+    </description>
+    <definition archetype_id="openEHR-EHR-COMPOSITION.encounter.v1"
+        concept_name="Encounter" name="Malnutrition Checkup"
+        xmlns:tem="openEHR/v1/Template"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="tem:COMPOSITION">
+        <Content archetype_id="openEHR-EHR-SECTION.adhoc.v1"
+            concept_name="Ad hoc heading" max="1" name="Measurements"
+            path="/content" xsi:type="tem:SECTION">
+            <Item archetype_id="openEHR-EHR-OBSERVATION.body_weight.v2"
+                max="1" path="/items" xsi:type="tem:OBSERVATION">
+                <Rule name="Point in time" path="/data[at0002]/events[at0003]"/>
+                <Rule path="/data[at0002]/events[at0003]/data[at0001]/items[at0004]">
+                    <constraint xsi:type="tem:quantityConstraint">
+                        <excludedUnits>g</excludedUnits>
+                        <excludedUnits>[lb_av]</excludedUnits>
+                        <unitMagnitude>
+                            <unit>kg</unit>
+                            <maxMagnitude>1000.0</maxMagnitude>
+                            <minMagnitude>0.0</minMagnitude>
+                            <includesMaximum>true</includesMaximum>
+                            <includesMinimum>true</includesMinimum>
+                        </unitMagnitude>
+                    </constraint>
+                </Rule>
+                <Rule max="0" path="/data[at0002]/events[at0003]/state[at0008]/items[at0025]"/>
+                <Rule max="0" path="/data[at0002]/events[at0026]"/>
+                <Rule clone="true" name="Simple" path="/data[at0002]/events[at0026]/data[at0001]"/>
+                <Rule clone="true" name="state structure" path="/data[at0002]/events[at0026]/state[at0008]"/>
+            </Item>
+            <Item archetype_id="openEHR-EHR-OBSERVATION.height.v2"
+                max="1" path="/items" xsi:type="tem:OBSERVATION">
+                <Rule name="Point in time" path="/data[at0001]/events[at0002]"/>
+                <Rule path="/data[at0001]/events[at0002]/data[at0003]/items[at0004]">
+                    <constraint xsi:type="tem:quantityConstraint">
+                        <excludedUnits>[in_i]</excludedUnits>
+                        <unitMagnitude>
+                            <unit>cm</unit>
+                            <maxMagnitude>1000.0</maxMagnitude>
+                            <minMagnitude>0.0</minMagnitude>
+                            <includesMaximum>true</includesMaximum>
+                            <includesMinimum>true</includesMinimum>
+                        </unitMagnitude>
+                    </constraint>
+                </Rule>
+                <Rule max="0" path="/data[at0001]/events[at0002]/state[at0013]/items[at0014]"/>
+                <Rule max="0" path="/data[at0001]/events[at0002]/state[at0013]/items[at0019]"/>
+                <Rule max="0" path="/data[at0001]/events[at0021]"/>
+                <Rule clone="true" name="Simple" path="/data[at0001]/events[at0021]/data[at0003]"/>
+                <Rule clone="true" name="Tree" path="/data[at0001]/events[at0021]/state[at0013]"/>
+            </Item>
+        </Content>
+        <Content archetype_id="openEHR-EHR-SECTION.adhoc.v1"
+            concept_name="Ad hoc heading" max="1" name="Assessments"
+            path="/content" xsi:type="tem:SECTION">
+            <Item
+                archetype_id="openEHR-EHR-OBSERVATION.mini_nutritional_assessmemt_short_form.v0"
+                concept_name="*Mini nutritional assessment short form (MNA-SF)(pt)"
+                max="1"
+                name="Mini nutritional assessment short form (MNA-SF)"
+                path="/items" xsi:type="tem:OBSERVATION">
+                <Rule name="Point in time" path="/data[at0001]/events[at0002]"/>
+            </Item>
+            <Item
+                archetype_id="openEHR-EHR-OBSERVATION.progress_note.v1"
+                max="1" path="/items" xsi:type="tem:OBSERVATION"/>
+        </Content>
+        <Context>
+            <Items
+                archetype_id="openEHR-EHR-CLUSTER.case_identification.v0"
+                max="1"
+                path="/context/other_context[at0001]/items[at0002]" xsi:type="tem:CLUSTER">
+                <Rule max="0" path="/items[at0006]"/>
+            </Items>
+        </Context>
+    </definition>
+    <integrity_checks
+        archetype_id="openEHR-EHR-COMPOSITION.encounter.v1"
+        xmlns:tem="openEHR/v1/Template"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="tem:ArchetypeIntegrity">
+        <digest id="MD5-CAM-1.0.1">44D94C2952391723BB72523E4132FF1C</digest>
+    </integrity_checks>
+    <integrity_checks
+        archetype_id="openEHR-EHR-CLUSTER.case_identification.v0"
+        xmlns:tem="openEHR/v1/Template"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="tem:ArchetypeIntegrity">
+        <digest id="MD5-CAM-1.0.1">D94F932D76D2D0389D242063ED336124</digest>
+    </integrity_checks>
+    <integrity_checks archetype_id="openEHR-EHR-SECTION.adhoc.v1"
+        xmlns:tem="openEHR/v1/Template"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="tem:ArchetypeIntegrity">
+        <digest id="MD5-CAM-1.0.1">8FE80F3E80C594AAF99D3BA540A53D73</digest>
+    </integrity_checks>
+    <integrity_checks
+        archetype_id="openEHR-EHR-OBSERVATION.body_weight.v2"
+        xmlns:tem="openEHR/v1/Template"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="tem:ArchetypeIntegrity">
+        <digest id="MD5-CAM-1.0.1">DA2B581B2FD7E726F272A7A790E8CB6B</digest>
+    </integrity_checks>
+    <integrity_checks archetype_id="openEHR-EHR-OBSERVATION.height.v2"
+        xmlns:tem="openEHR/v1/Template"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="tem:ArchetypeIntegrity">
+        <digest id="MD5-CAM-1.0.1">002F9BF49DF89130014FF655BCEFFF49</digest>
+    </integrity_checks>
+    <integrity_checks
+        archetype_id="openEHR-EHR-OBSERVATION.mini_nutritional_assessmemt_short_form.v0"
+        xmlns:tem="openEHR/v1/Template"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="tem:ArchetypeIntegrity">
+        <digest id="MD5-CAM-1.0.1">5EBF708B69F4BF410E6BB92EA29C87BB</digest>
+    </integrity_checks>
+    <integrity_checks
+        archetype_id="openEHR-EHR-OBSERVATION.progress_note.v1"
+        xmlns:tem="openEHR/v1/Template"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="tem:ArchetypeIntegrity">
+        <digest id="MD5-CAM-1.0.1">D6261CD4186797F15195B1CF6490069F</digest>
+    </integrity_checks>
+</template>
